@@ -1,4 +1,4 @@
-package com.example.productos;
+package com.example.productos.Fragmentos.Admin;
 
 import android.content.Context;
 import android.net.Uri;
@@ -9,10 +9,11 @@ import androidx.fragment.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
+import android.widget.TableLayout;
 import android.widget.TextView;
-import android.widget.Toast;
 
-import java.util.Calendar;
+import com.example.productos.R;
 
 
 /**
@@ -35,7 +36,9 @@ public class fragmentAdmin extends Fragment {
     private FragmentAdminListener listener;
     private OnFragmentInteractionListener mListener;
 
-    private TextView resultado;
+    private Button add_product;
+    private TableLayout table_product;
+
     CharSequence Temporal;
     public fragmentAdmin() {
         // Required empty public constructor
@@ -76,15 +79,17 @@ public class fragmentAdmin extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        View vista = inflater.inflate(R.layout.fragment_fragment_admin, container, false);
-        resultado = (TextView) vista.findViewById(R.id.id_productos);
+        View v = inflater.inflate(R.layout.fragment_admin, container, false);
+        add_product = (Button) v.findViewById(R.id.btn_add_product);
+        table_product = (TableLayout) v.findViewById(R.id.id_table_product);
+
         System.out.println("segundo");
         Bundle bundle = getArguments();
         String token = bundle.getString("token");
         int status = bundle.getInt("status");
-        Datos_User(token,status,resultado);
+        //Datos_User(token,status,resultado);
         //resultado.setText(Temporal);
-        return vista;
+        return v;
     }
 
     public void Datos_User(String token, int statusCode, TextView resultado){

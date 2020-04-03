@@ -1,6 +1,5 @@
-package com.example.productos;
+package com.example.productos.Fragmentos.User;
 
-import android.app.Activity;
 import android.content.Context;
 import android.net.Uri;
 import android.os.Bundle;
@@ -11,20 +10,19 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
-import android.widget.EditText;
-import android.widget.TextView;
-import android.widget.Toast;
+import android.widget.TableLayout;
 
+import com.example.productos.R;
 
 /**
  * A simple {@link Fragment} subclass.
  * Activities that contain this fragment must implement the
- * {@link fragmentsLogin.OnFragmentInteractionListener} interface
+ * {@link fragmentCarrito.OnFragmentInteractionListener} interface
  * to handle interaction events.
- * Use the {@link fragmentsLogin#newInstance} factory method to
+ * Use the {@link fragmentCarrito#newInstance} factory method to
  * create an instance of this fragment.
  */
-public class fragmentsLogin extends Fragment {
+public class fragmentCarrito extends Fragment {
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
     private static final String ARG_PARAM1 = "param1";
@@ -34,19 +32,13 @@ public class fragmentsLogin extends Fragment {
     private String mParam1;
     private String mParam2;
 
-    private Button btnLogin;
-    private EditText Nombre;
-    private EditText Pass;
-    private FragmentLoginListener listener;
+    private Button purchase;
+    private TableLayout table_products_purchases;
 
     private OnFragmentInteractionListener mListener;
 
-    public fragmentsLogin() {
+    public fragmentCarrito() {
         // Required empty public constructor
-    }
-
-    public interface FragmentLoginListener{
-        void onInputASent(String username, String password);
     }
 
     /**
@@ -55,11 +47,11 @@ public class fragmentsLogin extends Fragment {
      *
      * @param param1 Parameter 1.
      * @param param2 Parameter 2.
-     * @return A new instance of fragment fragmentsLogin.
+     * @return A new instance of fragment fragmentCarrito.
      */
     // TODO: Rename and change types and number of parameters
-    public static fragmentsLogin newInstance(String param1, String param2) {
-        fragmentsLogin fragment = new fragmentsLogin();
+    public static fragmentCarrito newInstance(String param1, String param2) {
+        fragmentCarrito fragment = new fragmentCarrito();
         Bundle args = new Bundle();
         args.putString(ARG_PARAM1, param1);
         args.putString(ARG_PARAM2, param2);
@@ -80,19 +72,10 @@ public class fragmentsLogin extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        View vista = inflater.inflate(R.layout.fragment_fragments_login, container, false);
-        btnLogin = vista.findViewById(R.id.btn_login);
-        Nombre = vista.findViewById(R.id.id_name);
-        Pass = vista.findViewById(R.id.id_password);
-        btnLogin.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                //Toast.makeText(getContext(), "Login", Toast.LENGTH_LONG).show();
-                listener.onInputASent(Nombre.getText().toString(), Pass.getText().toString());
-
-            }
-        });
-        return vista;
+        View v = inflater.inflate(R.layout.fragment_carrito, container, false);
+        purchase = (Button) v.findViewById(R.id.btn_purchase);
+        table_products_purchases = (TableLayout) v.findViewById(R.id.id_table_products_purchases);
+        return v;
     }
 
     // TODO: Rename method, update argument and hook method into UI event
@@ -105,26 +88,18 @@ public class fragmentsLogin extends Fragment {
     @Override
     public void onAttach(Context context) {
         super.onAttach(context);
-        //if (context instanceof FragmentLoginListener) {
-        //    listener = (FragmentLoginListener) context;
-        //} else {
-        //    throw new RuntimeException(context.toString()
-        //            + " must implement FragmentLoginListener");
-        //}
-        Activity activity = (Activity) context;
-
-        try {
-            listener = (FragmentLoginListener) activity;
-        }catch (RuntimeException a){
-            throw new RuntimeException(activity.toString()
-                                + " must implement FragmentLoginListener");
+        if (context instanceof OnFragmentInteractionListener) {
+            mListener = (OnFragmentInteractionListener) context;
+        } else {
+            throw new RuntimeException(context.toString()
+                    + " must implement OnFragmentInteractionListener");
         }
     }
 
     @Override
     public void onDetach() {
         super.onDetach();
-        listener = null;
+        mListener = null;
     }
 
     /**

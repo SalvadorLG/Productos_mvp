@@ -1,18 +1,15 @@
 package com.example.productos;
 
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentTransaction;
 
-import android.net.Uri;
 import android.os.Bundle;
-import android.view.View;
-import android.widget.EditText;
-import android.widget.TextView;
-import android.widget.Toast;
+
+import com.example.productos.Fragmentos.Admin.fragmentAdmin;
+import com.example.productos.Fragmentos.fragmentsLogin;
 
 public class ProductosView extends AppCompatActivity
-            implements ProductosInterface.View, fragmentsLogin.FragmentLoginListener,fragmentAdmin.FragmentAdminListener{
+            implements ProductosInterface.View, com.example.productos.Fragmentos.fragmentsLogin.FragmentLoginListener, com.example.productos.Fragmentos.Admin.fragmentAdmin.FragmentAdminListener{
 
     private fragmentsLogin fragmentsLogin;
     private fragmentAdmin fragmentAdmin;
